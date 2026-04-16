@@ -1,3 +1,4 @@
+import os
 import discord
 from discord import app_commands
 import aiosqlite
@@ -7,7 +8,10 @@ from collections import defaultdict
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
-TOKEN = 'YOUR_BOT_TOKEN_HERE'
+TOKEN = os.getenv('TOKEN')
+if not TOKEN:
+    print("❌ ERROR: TOKEN が設定されていません。RenderのEnvironment Variablesを確認してください。")
+    raise ValueError("Missing TOKEN environment variable")
 GUILD_ID = None
 
 intents = discord.Intents.default()
